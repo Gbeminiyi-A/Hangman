@@ -1,5 +1,5 @@
 # Create hangman CLI
-
+import sys
 
 WORD = "HANGMAN"
 
@@ -38,4 +38,7 @@ def catch_fails(fails):
 
 
 if __name__ == "__main__":
-    game()
+    try:
+        game()
+    except KeyboardInterrupt:
+        sys.exit()
