@@ -78,17 +78,14 @@ def intro():
         """)
     print("-" * len(WORD))
 
+
 def game():
     intro()
     fails = 0
+    print(f"There are {len(WORD)} letters in this word.")
     while fails < 5:
-        print(f"There are {len(WORD)} letters in this word.")
-        letter = input("Enter a letter: ").upper()
-        if letter in WORD:
-            print("Correct")
-        else:
-            print("fail")
-            fails += 1
+        user_guess()
+        fails += 1
     print(f"The correct word is {WORD}")
 
 
@@ -97,9 +94,27 @@ def catch_fails(fails):
 
 
 def user_guess():
-    letter = input("Enter a number: ")
+    letter = input("Enter a letter: ").upper()
     if letter in WORD:
-        pass
+        if letter in correct_guess:
+            print("You have entered this letter before, Try again")
+            user_guess()
+        else:
+            correct_guess.append(letter)
+            print(True)
+    else:
+        if letter in missed_letters:
+            print("You have entered this letter before, Try again")
+        else:
+            missed_letters.append(letter)
+    print(f"You've entered {', '.join(correct_guess)} {', '.join(missed_letters)}")
+
+
+def check_remaining(letter_input):
+    position = []
+    for letter in WORD:
+        if letter_input == letter:
+            position.append(WORD.find(letter_input))
 
 
 if __name__ == "__main__":
