@@ -3,6 +3,9 @@ import sys
 
 WORD = "HANGMAN"
 guessed_word = "-" * len(WORD)
+position = []
+word = list(WORD)
+guessed = list(guessed_word)
 
 HANGMAN_PICS = [r"""
   +--+
@@ -101,7 +104,7 @@ def user_guess():
                 print("You have entered this letter before, Try again")
             else:
                 correct_guess.append(letter)
-                check_remaining(letter)
+                show_guess(letter)
         else:
             if letter in missed_letters:
                 print("You have entered this letter before, Try again")
@@ -111,13 +114,15 @@ def user_guess():
         print(f"You've entered {', '.join(correct_guess)}, {', '.join(missed_letters)}")
 
 
-def check_remaining(letter_input):
-    position = []
-    for i in WORD:
-        if letter_input == WORD:
-            position.append(i)
-            guessed_word.replace("-", letter_input)
-    print(guessed_word)
+def show_guess(letter_input):
+    global guessed
+
+    for i in word:
+        if letter_input == i:
+            index = word.index(i)
+
+            guessed[index] = letter_input
+    print("".join(guessed))
 
 
 if __name__ == "__main__":
