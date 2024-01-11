@@ -3,6 +3,66 @@ import sys
 
 WORD = "HANGMAN"
 
+HANGMAN_PICS = [r"""
+  +--+
+  |  |
+     |
+     |
+     |
+     |
+ =====""",
+                r"""
+  +--+
+  |  |
+  O  |
+     |
+     |
+     |
+ =====""",
+                r"""
+  +--+
+  |  |
+  O  |
+  |  |
+     |
+     |
+ =====""",
+                r"""
+  +--+
+  |  |
+  O  |
+ /|  |
+     |
+     |
+ =====""",
+                r"""
+  +--+
+  |  |
+  O  |
+ /|\ |
+     |
+     |
+ =====""",
+                r"""
+   +--+
+   |  |
+   O  |
+  /|\ |
+  /   |
+      |
+  =====""",
+                r"""
+   +--+
+   |  |
+   O  |
+  /|\ |
+  / \ |
+      |
+  ====="""]
+
+missed_letters = []
+correct_guess = []
+
 
 def intro():
     print(
@@ -16,7 +76,7 @@ def intro():
                             __/ |
                            |___/
         """)
-
+    print("-" * len(WORD))
 
 def game():
     intro()
@@ -33,8 +93,13 @@ def game():
 
 
 def catch_fails(fails):
-    if fails == 1:
-        print("")
+    print(HANGMAN_PICS[fails - 1])
+
+
+def user_guess():
+    letter = input("Enter a number: ")
+    if letter in WORD:
+        pass
 
 
 if __name__ == "__main__":
