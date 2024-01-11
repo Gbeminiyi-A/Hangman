@@ -96,18 +96,14 @@ def catch_fails(fails):
 def user_guess():
     letter = input("Enter a letter: ").upper()
     if letter in WORD:
-        if letter in correct_guess:
+        if letter in correct_guess or missed_letters:
             print("You have entered this letter before, Try again")
-            user_guess()
         else:
             correct_guess.append(letter)
             print(True)
     else:
-        if letter in missed_letters:
-            print("You have entered this letter before, Try again")
-        else:
-            missed_letters.append(letter)
-    print(f"You've entered {', '.join(correct_guess)} {', '.join(missed_letters)}")
+        missed_letters.append(letter)
+    print(f"You've entered {', '.join(correct_guess)}, {', '.join(missed_letters)}")
 
 
 def check_remaining(letter_input):
