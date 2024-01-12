@@ -91,13 +91,10 @@ def game():
     print(f"The correct word is {WORD}")
 
 
-def catch_fails(fails):
-    print(HANGMAN_PICS[fails - 1])
-
-
 def user_guess():
     fails = 0
     while fails < 7:
+        is_finished()
         letter = input("Enter a letter: ").upper()
         if letter in WORD:
             if letter in correct_guess:
@@ -118,11 +115,24 @@ def user_guess():
 
 def show_guess(letter_input):
     global guessed
-    for i in word:
-        if letter_input == i:
-            index = word.index(i)
-            guessed[index] = letter_input
+    for i, letter in enumerate(word):
+        if letter_input == letter:
+            guessed[i] = letter_input
     print("".join(guessed))
+
+
+def is_finished():
+    if "".join(guessed) == WORD:
+        print(f"You've won, the word was {WORD}")
+        again = input("Would you like to play again? y/n: ").lower()
+        if again == "y":
+            game()
+        elif again == "n":
+            print("Thank you for playing!")
+            sys.exit()
+        else:
+            print("Not a valid input.")
+            user_guess()
 
 
 if __name__ == "__main__":
