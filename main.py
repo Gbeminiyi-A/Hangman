@@ -131,8 +131,8 @@ def is_finished():
             print("Thank you for playing!")
             sys.exit()
         else:
-            print("Not a valid input.")
-            user_guess()
+            print("Not a valid input. \n")
+            is_finished()
 
 
 if __name__ == "__main__":
