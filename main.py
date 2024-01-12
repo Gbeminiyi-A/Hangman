@@ -1,7 +1,13 @@
 # Create hangman CLI
+import os
+import random
 import sys
 
-WORD = "HANGMAN"
+with open('words.txt', 'r') as word_file:
+    data = word_file.read()
+    words_list = data.split("\n")
+
+WORD = words_list[random.randint(0, len(words_list))].upper()
 guessed_word = "-" * len(WORD)
 position = []
 word = list(WORD)
@@ -87,21 +93,23 @@ def game():
     intro()
     print(f"There are {len(WORD)} letters in this word. \n")
     user_guess()
-
     print(f"The correct word is {WORD}")
+    is_finished()
 
 
 def user_guess():
     fails = 0
     while fails < 7:
-        is_finished()
+        if "".join(guessed) == WORD:
+            print(f"You've won, the word was {WORD}")
+            is_finished()
         letter = input("Enter a letter: ").upper()
         if letter in WORD:
             if letter in correct_guess:
                 print("You have entered this letter before, Try again\n")
             else:
                 correct_guess.append(letter)
-                show_guess(letter)
+
         else:
             if letter in missed_letters:
                 print("You have entered this letter before, Try again\n")
@@ -111,6 +119,7 @@ def user_guess():
                 print(HANGMAN_PICS[fails])
                 fails += 1
         print(f"You've entered {', '.join(correct_guess)}, {', '.join(missed_letters)}\n")
+        show_guess(letter)
 
 
 def show_guess(letter_input):
@@ -122,17 +131,16 @@ def show_guess(letter_input):
 
 
 def is_finished():
-    if "".join(guessed) == WORD:
-        print(f"You've won, the word was {WORD}")
-        again = input("Would you like to play again? y/n: ").lower()
-        if again == "y":
-            game()
-        elif again == "n":
-            print("Thank you for playing!")
-            sys.exit()
-        else:
-            print("Not a valid input. \n")
-            is_finished()
+    again = input("Would you like to play again? y/n: ").lower()
+    if again == "y":
+        os.system("cls||clear")
+        game()
+    elif again == "n":
+        print("Thank you for playing!")
+        sys.exit()
+    else:
+        print("Not a valid input. \n")
+        is_finished()
 
 
 if __name__ == "__main__":
