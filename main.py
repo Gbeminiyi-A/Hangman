@@ -114,11 +114,12 @@ def user_guess():
                 print("You have entered this letter before, Try again\n")
             else:
                 missed_letters.append(letter)
-                print("The letter you have entered is not in the word.")
+                print("\n\nThe letter you have entered is not in the word.")
                 print(HANGMAN_PICS[fails])
                 fails += 1
         print(f"You've entered {', '.join(correct_guess)}, {', '.join(missed_letters)}\n")
         show_guess(letter)
+    print(f"\nooooh... So close!!!")
 
 
 def show_guess(letter_input):
@@ -132,8 +133,8 @@ def show_guess(letter_input):
 def is_finished():
     again = input("Would you like to play again? y/n: ").lower()
     if again == "y":
-        os.system("cls||clear")
-        game()
+        os.system('cls' if os == "nt" else 'clear')
+        os.system("python main.py")
     elif again == "n":
         print("Thank you for playing!")
         sys.exit()
