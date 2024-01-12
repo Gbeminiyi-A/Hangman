@@ -9,7 +9,6 @@ with open('words.txt', 'r') as word_file:
 
 WORD = words_list[random.randint(0, len(words_list))].upper()
 guessed_word = "-" * len(WORD)
-position = []
 word = list(WORD)
 guessed = list(guessed_word)
 
