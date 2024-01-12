@@ -92,7 +92,6 @@ def game():
     intro()
     print(f"There are {len(WORD)} letters in this word. \n")
     user_guess()
-    print(f"The correct word is {WORD}")
     is_finished()
 
 
@@ -102,6 +101,7 @@ def user_guess():
         if "".join(guessed) == WORD:
             print(f"You've won, the word was {WORD}")
             is_finished()
+            sys.exit()
         letter = input("Enter a letter: ").upper()
         if letter in WORD:
             if letter in correct_guess:
@@ -120,6 +120,7 @@ def user_guess():
         print(f"You've entered {', '.join(correct_guess)}, {', '.join(missed_letters)}\n")
         show_guess(letter)
     print(f"\nooooh... So close!!!")
+    print(f"The correct word is {WORD}")
 
 
 def show_guess(letter_input):
