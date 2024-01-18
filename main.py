@@ -134,7 +134,7 @@ def show_guess(letter_input):
 def is_finished():
     again = input("Would you like to play again? y/n: ").lower()
     if again == "y":
-        os.system('cls' if os == "nt" else 'clear')
+        os.system('cls' if os == "nt" else 'clear||cls')
         os.system("python main.py")
     elif again == "n":
         print("Thank you for playing!")
